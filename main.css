@@ -1,0 +1,670 @@
+* {
+	margin: 0px;
+	padding: 0px;
+}
+
+html {
+    font-size: 16px
+}
+
+body {
+	background-color: rgb(215, 215, 215);
+	font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+section.content-box {
+	padding: 25px 25px 25px 10px;
+}
+
+section.content-panel {
+	background-color: white;
+	border: 1px solid rgb(200, 200, 200);
+	border-radius: 8px;
+}
+
+@media (min-width: 501px) {
+    section.main-panel {
+        width: 70%;
+        float: left;
+    }
+    
+    section.side-panel {
+        width: 25%;
+        float: right;
+    }
+}
+
+/** Main Panel -- Search Bar */
+
+section.main-panel-search-bar {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 65px;
+	padding: 20px;
+}
+
+section.main-panel-search-bar > input, section.main-panel-search-bar > button {
+	width: 80%;
+	height: 100%;
+	box-sizing: border-box;
+	font-size: 1.4rem;
+	border: 1.5px solid rgb(212, 212, 212);
+}
+
+section.main-panel-search-bar > button {
+	width: 20%;
+	border: 1.5px solid #0070b6;
+	border-bottom: 4px outset #0076bf;
+	border-top-right-radius: 8px;
+	border-bottom-right-radius: 8px;
+	background-color: #0e90e1;
+	color: whitesmoke;
+	font-weight: 700;
+}
+
+section.main-panel-search-bar > button:hover {
+	background-color: #0867a3;
+	transition: 0.5s ease-in-out all;
+}
+
+section.main-panel-search-bar > button:active {
+	border: 1.5px inset rgb(212, 212, 212);
+	background-color: rgb(212, 212, 212);
+	color: black;
+	transition: 0.15s ease-out all;
+}
+
+section.main-panel-search-bar > input {
+	padding-left: 20px;
+	border-top-left-radius: 8px;
+	border-bottom-left-radius: 8px;
+}
+
+section.main-panel-search-bar > input:focus {
+	outline-color: rgb(128, 128, 128);
+}
+
+/** Main Panel -- Items */
+
+section.main-panel-item {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	height: 50px;
+	padding: 15px 20px;
+	border-top: 1.5px solid rgb(212, 212, 212);
+}
+
+section.main-panel-item > section.item-label {
+    display: flex;
+    align-items: center;
+    width: 250px;
+	font-size: 1.25rem;
+}
+
+section.main-panel-item input.item-input-field {
+	max-width: 150px;
+    height: 60%;
+    font-size: 1rem;
+    padding-left: 8px;
+    border: 1.5px solid rgb(212, 212, 212);
+    border-radius: 3px;
+}
+
+section.main-panel-item input.item-input-field:focus {
+    outline-color: rgb(128, 128, 128);
+}
+
+section.main-panel-item > section.item-buttons {
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    width: 250px;
+}
+
+section.main-panel-item > section.item-buttons > button.red-button {
+    margin-left: 10px;
+}
+
+section.main-panel-item > .item-counter {
+    display: flex;
+    align-items: center;
+}
+
+.item-wrapper {
+	display: flex;
+	align-items: center;
+    height: 35px;
+    margin: 0px 8px;
+    padding: 5px;
+    border-radius: 5px;
+	background-color: rgb(230, 230, 230);
+}
+
+.item-wrapper > .item-counter-number {
+    width: 35px;
+	text-align: center;
+	font-size: 1.2rem;
+}
+
+section.main-panel-item > section {
+	height: 100%;
+}
+
+.disabled {
+	display: none;
+}
+
+.crossed-out {
+	text-decoration: line-through;
+}
+
+/** Main Panel -- Item Buttons */
+
+.item-button {
+	height: 100%;
+	padding: 0px 1.25rem;
+	font-size: 1.1rem;
+	font-weight: 600;
+    color: rgb(64, 64, 64);
+	background-color: rgb(235, 235, 235);
+	border: 1px solid rgb(205, 205, 205);
+	border-bottom: 4px outset white;
+}
+
+.circle-button {
+	border-radius: 100px;
+}
+
+.square-button {
+	border-radius: 8px;
+}
+
+.red-button {
+	color: whitesmoke;
+	background-color: rgb(220, 0, 0);
+	border: 1px solid rgb(183, 0, 0);
+	border-bottom: 3.5px outset rgb(183, 0, 0);
+	font-weight: 700;
+}
+
+.inactive {
+    background-color: rgba(220, 0, 0, 0.45);
+    border: 1px solid rgba(220, 0, 0, 0.2);
+    outline: none;
+}
+
+.red-button:not(.inactive):hover {
+    background-color: rgb(174, 19, 19);
+	transition: 0.5s ease-in-out all;   
+}
+
+.red-button:not(.inactive):active {
+    border: 1.5px inset rgb(212, 212, 212);
+	background-color: rgb(212, 212, 212);
+	color: black;
+	transition: 0.15s ease-out all;  
+}
+
+.green-button {
+	color: whitesmoke;
+	background-color: rgb(0, 182, 0);
+	border: 1px solid green;
+	border-bottom: 3.5px outset green;
+	font-weight: 700;
+}
+
+.green-button:not(.inactive):hover {
+    background-color: rgb(8, 145, 8);
+	transition: 0.5s ease-in-out all;
+}
+
+.green-button:not(.inactive):active {
+    border: 1.5px inset rgb(212, 212, 212);
+	background-color: rgb(212, 212, 212);
+	color: black;
+	transition: 0.15s ease-out all;   
+}
+
+.text-button {
+	padding: 0px 35px;
+}
+
+.text-button:not(.inactive):hover {
+    background-color: rgb(195, 195, 195);
+	transition: 0.5s ease-in-out all;
+}
+
+.text-button:not(.inactive):active {
+    border: 1.5px inset rgb(212, 212, 212);
+	background-color: rgb(212, 212, 212);
+	color: black;
+	transition: 0.15s ease-out all;
+}
+
+/** Side Panel -- Items */
+
+section.side-panel-item {
+    display: flex;
+	align-items: center;
+	height: 60px;
+	padding: 15px 20px;
+}
+
+section.side-panel-item > span {
+    font-size: 1.4rem;
+    font-weight: 700;
+}
+
+section.side-panel-item > section.item-card {
+    display: flex;
+    align-items: center;
+    height: 75%;
+    padding: 0px 13px;
+	border-radius: 5px;
+    background-color: rgb(230, 230, 230);
+}
+
+section.side-panel-item span.item-label {
+    color: rgb(64, 64, 64);
+    margin-right: 5px;
+}
+
+section.side-panel-item span.item-amount {
+    display: flex;
+    width: 30px;
+    height: 30px;
+    justify-content: center;
+    align-items: center;
+    background-color: orange;
+    color: whitesmoke;
+    border-radius: 20px;
+}
+
+/** Side Panel -- Styling-only classes */
+
+.using-top-border {
+    border-top: 1.5px solid rgb(212, 212, 212);   
+}
+
+.using-right-margin {
+    margin-right: 7px;
+}
+
+/** Tooltip styles */
+
+[data-tooltip] {
+    position: relative;
+}
+  
+[data-tooltip]::after {
+    position: absolute;
+    padding: 8px 12px;
+    bottom: 15px;
+    left: 25%;
+    content: attr(data-tooltip);
+    transform: translate(0%, -100%) scale(0);
+    transform-origin: bottom;
+    transition: 0.25s;
+    text-align: center;
+    color: whitesmoke;
+    font-size: 14px;
+    background-color: rgb(160, 0, 160);
+    border: 1px solid rgb(160, 0, 160);
+    border-radius: 8px;
+}
+  
+[data-tooltip]:hover:after {
+    display: block;
+    transform: translate(0%, -100%) scale(1);
+}
+
+/** Overwriting generic tooltip styling in specific cases */
+
+.text-button[data-tooltip]::after {
+    bottom: 0px;
+}
+
+section.main-panel-item > section.item-buttons > button.red-button[data-tooltip]::after {
+    left: -25%;
+    bottom: -7px;
+}
+
+section.main-panel-item > section.item-counter > button.red-button[data-tooltip]::after {
+    left: -48%;
+    bottom: 15px;
+}
+
+section.main-panel-item > section.item-counter > button.green-button[data-tooltip]::after {
+    left: -40%;
+    bottom: 15px;
+}
+
+/** Standalone item -- The badge (visible) */
+
+section.visible-badge {
+    position: fixed;
+    width: 160px;
+    height: 150px;
+    left: 25px;
+    bottom: -115px;
+    padding: 15px 10px 15px 20px;
+    color: whitesmoke;
+    background-color: rgb(160, 0, 160);
+    border-radius: 7px;
+}
+
+section.visible-badge > span {
+    display: block;
+}
+
+section.visible-badge > span.title-label {
+    font-size: 28px;
+    font-weight: 600;
+    margin-bottom: 25px;
+}
+
+section.visible-badge > span.created-by-label {
+    font-size: 14px;
+    font-weight: 300;
+}
+
+section.visible-badge > span.author-label {
+    font-size: 16px;
+}
+
+section.visible-badge:hover {
+    bottom: -50px;
+    background-color: rgb(54, 0, 147);
+    transition: 1s ease-in all;
+}
+
+/** Standalone item -- The badge (@media print only) */
+section.print-badge {
+    position: fixed;
+    width: 160px;
+    height: 150px;
+    left: 25px;
+    bottom: -115px;
+    padding: 15px 10px 15px 20px;
+    color: black;
+    background-color: white;
+    border: 1px solid rgb(160, 0, 160);
+    border-radius: 7px;
+    display: none;
+}
+
+section.print-badge > span {
+    display: block;
+}
+
+section.print-badge > span.created-by-label {
+    font-size: 14px;
+    font-weight: 300;
+}
+
+section.print-badge > span.author-label {
+    font-size: 16px;
+}
+
+/** At-rules -- @media print */
+@media print {
+    section.visible-badge {
+        display: none;
+    }
+    
+    section.print-badge {
+        display: block;
+    }
+}
+
+/** At-rules -- @media layout */
+@media (max-width: 1050px) {
+    html {
+        font-size: 14px;
+    }
+
+    .item-wrapper {
+        height: 25px;
+    }
+
+    .item-wrapper > .item-counter-number {
+        width: 25px;
+    }
+
+    .item-button {
+        height: 85%;
+        padding: 0px 1.1rem;   
+    }
+
+    .text-button {
+        padding: 0px 25px;
+    }
+
+    section.main-panel-item input.item-input-field {
+        max-width: 125px;
+    }
+
+    section.side-panel-item > section.item-card {
+        padding: 0px 10px;
+    }
+
+    section.side-panel-item span.item-amount {
+        width: 20px;
+        height: 20px;
+    }
+}
+
+@media (max-width: 860px) {
+    html {
+        font-size: 12px;
+    }
+
+    .item-wrapper {
+        height: 20px;
+    }
+
+    .item-wrapper > .item-counter-number {
+        width: 20px;
+    }
+
+    .item-button {
+        height: 70%;
+        padding: 0px 1rem;   
+    }
+
+    .text-button {
+        padding: 0px 20px;
+    }
+
+    section.main-panel-item input.item-input-field {
+        max-width: 105px;
+    }
+
+    section.side-panel-item > section.item-card {
+        padding: 0px 7px;
+    }
+
+    section.side-panel-item span.item-amount {
+        width: 16px;
+        height: 16px;
+    }
+}
+
+@media (max-width: 750px) {
+    html {
+        font-size: 11px;
+    }
+
+    .item-wrapper {
+        height: 16px;
+    }
+
+    .item-wrapper > .item-counter-number {
+        width: 16px;
+    }
+
+    .item-button {
+        height: 55%;
+        padding: 0px 0.92rem;   
+    }
+
+    .text-button {
+        padding: 0px 15px;
+    }
+
+    section.main-panel-item > section.item-buttons > button.red-button {
+        margin-left: 5px;
+    }
+
+    section.main-panel-search-bar {
+        padding: 20px 10px;
+    }
+
+    section.main-panel-item {
+        padding: 15px 10px;
+    }
+
+    section.main-panel-item input.item-input-field {
+        max-width: 85px;
+    }
+
+    section.side-panel-item {
+        padding: 15px 10px;
+    }
+
+    section.side-panel-item > section.item-card {
+        padding: 0px 5px;
+    }
+
+    section.side-panel-item span.item-amount {
+        width: 13px;
+        height: 13px;
+    }
+}
+
+@media (max-width: 610px) {
+    html {
+        font-size: 10px;
+    }
+
+    .item-wrapper {
+        margin: 0px 4px;
+        height: 14px;
+    }
+
+    .item-wrapper > .item-counter-number {
+        width: 14px;
+    }
+
+    .item-button {
+        height: 45%;
+        padding: 0px 0.75rem;   
+    }
+
+    .text-button {
+        padding: 0px 5px;
+    }
+
+    section.main-panel-item > section.item-buttons > button.red-button {
+        margin-left: 4px;
+    }
+
+    section.main-panel-search-bar {
+        padding: 20px 5px;
+    }
+
+    section.main-panel-item {
+        padding: 15px 5px;
+    }
+
+    section.main-panel-item input.item-input-field {
+        max-width: 75px;
+    }
+
+    section.side-panel-item {
+        padding: 15px 3px;
+    }
+
+    section.side-panel-item > section.item-card {
+        padding: 0px 3px;
+    }
+
+    section.side-panel-item span.item-label {
+        margin-right: 2px;
+    }
+
+    section.side-panel-item span.item-amount {
+        width: 13px;
+        height: 13px;
+    }
+}
+
+@media (max-width: 500px) {
+    html {
+        font-size: 13px;
+    }
+
+    section.content-box {
+        padding: 10px;
+    }
+
+    section.main-panel {
+        margin-bottom: 15px;
+    }
+
+    .item-wrapper {
+        margin: 0px 5px;
+        height: 20px;
+    }
+
+    .item-wrapper > .item-counter-number {
+        width: 20px;
+    }
+
+    .item-button {
+        height: 100%;
+        padding: 0px 0.8rem;   
+    }
+
+    .text-button {
+        padding: 0px 10px;
+    }
+
+    section.main-panel-item > section.item-buttons > button.red-button {
+        margin-left: 6px;
+    }
+
+    section.main-panel-search-bar {
+        height: 45px;
+        padding: 10px;
+    }
+
+    section.main-panel-item {
+        height: 30px;
+        padding: 15px 10px;
+    }
+
+    section.main-panel-item input.item-input-field {
+        max-width: 100px;
+    }
+
+    section.side-panel-item {
+        height: 40px;
+        padding: 10px;
+    }
+
+    section.side-panel-item > section.item-card {
+        padding: 0px 10px;
+    }
+
+    section.side-panel-item span.item-label {
+        margin-right: 5px;
+    }
+
+    section.side-panel-item span.item-amount {
+        width: 20px;
+        height: 20px;
+    }
+}

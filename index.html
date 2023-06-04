@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head lang="uk">
+    <meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lab2 - Buy List</title>
+
+    <link rel="stylesheet" type="text/css" href="main.css" />
+</head>
+
+<body>
+	<section class="content-box">
+        <!-- Main Panel -->
+		<section class="content-panel main-panel">
+			<!-- Search Bar -->
+			<section class="main-panel-search-bar">
+				<input type="text" placeholder="Назва товару" />
+				<button type="submit" data-tooltip="Add Element">Додати</button>
+			</section>
+
+			<!-- First Item -->
+			<section class="main-panel-item">
+				<section class="item-label crossed-out">Помідори</section>
+
+				<section class="item-counter">
+					<button class="item-button red-button circle-button disabled" data-tooltip="Decrement">–</button>
+					<span class="item-wrapper">
+						<span class="item-counter-number">2</span>
+					</span>
+					<button class="item-button green-button circle-button disabled" data-tooltip="Increment">+</button>
+				</section>
+
+				<section class="item-buttons">
+					<button class="item-button text-button square-button" data-tooltip="Buy state">Не куплено</button>
+					<button class="item-button red-button square-button disabled" data-tooltip="Remove chosen">×</button>
+				</section>
+			</section>
+
+			<!-- Second Item -->
+			<section class="main-panel-item">
+				<section class="item-label">Печиво</section>
+
+				<section class="item-counter">
+					<button class="item-button red-button circle-button" data-tooltip="Decrement">–</button>
+					<span class="item-wrapper">
+						<span class="item-counter-number">2</span>
+					</span>
+					<button class="item-button green-button circle-button" data-tooltip="Increment">+</button>
+				</section>
+
+				<section class="item-buttons">
+					<button class="item-button text-button square-button" data-tooltip="Buy state">Куплено</button>
+					<button class="item-button red-button square-button" data-tooltip="Remove chosen">×</button>
+				</section>
+			</section>
+
+			<!-- Third Item -->
+			<section class="main-panel-item">
+				<section class="item-label">
+                    <input class="item-input-field" value="Сир" readonly />
+                </section>
+
+				<section class="item-counter">
+					<button class="item-button red-button circle-button inactive" tabindex="-1">–</button>
+					<span class="item-wrapper">
+						<span class="item-counter-number">1</span>
+					</span>
+					<button class="item-button green-button circle-button" data-tooltip="Increment">+</button>
+				</section>
+
+				<section class="item-buttons">
+					<button class="item-button text-button square-button" data-tooltip="Buy state">Куплено</button>
+					<button class="item-button red-button square-button" data-tooltip="Remove chosen">×</button>
+				</section>
+			</section>
+		</section>
+	
+        <!-- Side Panel -->
+		<section class="content-panel side-panel">
+			<section class="side-panel-item">
+                <span>Залишилося</span>
+            </section>
+
+			<section class="side-panel-item using-top-border">
+                <section class="item-card using-right-margin">
+                    <span class="item-label">Печиво</span>
+                    <span class="item-amount">2</span>
+                </section>
+
+                <section class="item-card">
+                    <span class="item-label">Сир</span>
+                    <span class="item-amount">1</span>
+                </section>
+            </section>
+
+			<section class="side-panel-item using-top-border">
+                <span>Куплено</span>
+            </section>
+
+			<section class="side-panel-item using-top-border">
+                <section class="item-card">
+                    <span class="item-label crossed-out">Помідори</span>
+                    <span class="item-amount">2</span>
+                </section>
+            </section>
+		</section>
+
+        <!-- The badge (Visible) -->
+        <section class="visible-badge">
+            <span class="title-label">Buy List</span>
+            <span class="created-by-label">Created by:</span>
+            <span class="author-label">Oleksiy Zhytnetsky</span>
+        </section>
+
+        <!-- The badge (@media print only) -->
+        <section class="print-badge">
+            <span class="created-by-label">Created by:</span>
+            <span class="author-label">Oleksiy Zhytnetsky</span>
+        </section>
+	</section>
+</body>
+</html>

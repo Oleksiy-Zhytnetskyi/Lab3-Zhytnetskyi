@@ -1,7 +1,10 @@
 /* Classes */
 class PageContentBuilder {
     /* Constructors */
-    constructor() { initEventListeners(); }
+    constructor() { 
+        initListItemCreationListener();
+        initListItemCreationButtonListener();
+    }
 
     /* "Public" Methods */
     addSidePanelItem(itemName, isBought, itemValue = 1) {
@@ -118,6 +121,7 @@ class PageContentBuilder {
                 break;
             }
         }
+        return;
     }
 
     createListItemQuantityCounter(itemValue) {
@@ -182,11 +186,17 @@ class PageContentBuilder {
         itemLabel.contentEditable = "true";
         itemLabel.setAttribute("data-previous-content", itemName);
         itemLabel.addEventListener("input", () => {
-            renameSidePanelItem(itemLabel.getAttribute("data-previous-content"), itemLabel.innerHTML);
             EXISTING_ITEM_NAMES = EXISTING_ITEM_NAMES.filter(
                 elementName => elementName !== itemLabel.getAttribute("data-previous-content").toLowerCase()
             );
             EXISTING_ITEM_NAMES.push(itemLabel.innerHTML.toLowerCase());
+            
+            renameSidePanelItem(itemLabel.getAttribute("data-previous-content"), itemLabel.innerHTML);
+            if (nameOccurrenceCount(itemLabel.innerHTML) > 1) {
+                this.deleteSidePanelItem(itemLabel.innerHTML, false);
+                itemLabel.parentElement.remove();
+            }
+            
             itemLabel.setAttribute("data-previous-content", itemLabel.innerHTML);
         });
         return itemLabel;
@@ -204,11 +214,13 @@ function createInitialListItems() {
     createInitialListItem("Помідори");
     createInitialListItem("Печиво");
     createInitialListItem("Сир");
+    return;
 }
 
 function createInitialListItem(itemName, itemValue = 1) {
     CONTENT_BUILDER.addListItem(itemName, itemValue);
     CONTENT_BUILDER.addSidePanelItem(itemName, false, itemValue);
+    return;
 }
 
 function addMainPanelListItem() {
@@ -270,53 +282,19 @@ function renameSidePanelItem(targetName, newName) {
             break;
         }
     }
-}
-
-/* Event Listeners & Handlers */
-function initEventListeners() {
-    initListItemCreationListener();
-    initListItemCreationButtonListener();
-
-    // initListItemDeletionListeners();
-    // initListItemPurchaseListeners(true);
-    // initListItemPurchaseListeners(false);
-
-    // initListItemCountModifierListeners(true);
-    // initListItemCountModifierListeners(false);
     return;
 }
 
-// function initListItemCountModifierListeners(isIncrementing) {
-//     const buttons = (isIncrementing) ? document.querySelectorAll(".item-counter > .green-button") : 
-//         document.querySelectorAll(".item-counter > .red-button");
-//     for (const button of buttons) {
-//         button.addEventListener("click", () => {
-//             modifyItemCount(button, isIncrementing);
-//         });
-//     }
-//     return;
-// }
+function nameOccurrenceCount(newName) {
+    let counter = 0;
+    for (const itemName of EXISTING_ITEM_NAMES) {
+        console.log(itemName);
+        if (itemName === newName.toLowerCase()) ++counter;
+    }
+    return counter;
+}
 
-// function initListItemPurchaseListeners(isBuying) {
-//     const buttons = (isBuying) ? document.querySelectorAll(".buy-button") : document.querySelectorAll(".revert-button");
-//     for (const button of buttons) {
-//         button.addEventListener("click", () => {
-//             changeButtonsVisibility(button, isBuying);
-//         });
-//     }
-//     return;
-// }
-
-// function initListItemDeletionListeners() {
-//     const deleteButtons = document.querySelectorAll(".item-buttons > .red-button");
-//     for (const button of deleteButtons) {
-//         button.addEventListener("click", () => { 
-//             button.parentElement.parentElement.remove(); 
-//         });
-//     }
-//     return;
-// }
-
+/* Event Listeners & Handlers */
 function initListItemCreationButtonListener() {
     document.querySelector(".main-panel-search-bar > button").addEventListener("click", addMainPanelListItem);
     return;

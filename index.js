@@ -105,11 +105,28 @@ class PageContentBuilder {
 }
 
 /* Object Instantiation */
-const builder = new PageContentBuilder();
-builder.addListItem("Каша");
+const CONTENT_BUILDER = new PageContentBuilder();
 
 /* Event Listeners */
-// ...
+
+// Search Bar Input Field
+document.querySelector(".main-panel-search-bar > input").addEventListener("keypress", listItemCreationHandler);
+
+// Search Bar "Add Element" Button
+document.querySelector(".main-panel-search-bar > button").addEventListener("click", addMainPanelListItem);
 
 /* Event Handlers */
-// ...
+function listItemCreationHandler(event) {
+    if (event.key === "Enter") addMainPanelListItem();
+    return;
+}
+
+/* Functions */
+function addMainPanelListItem() {
+    const inputField = document.querySelector(".main-panel-search-bar > input");
+    if (inputField.value !== "") {
+        CONTENT_BUILDER.addListItem(inputField.value);
+        inputField.value = "";
+    }
+    return;
+}

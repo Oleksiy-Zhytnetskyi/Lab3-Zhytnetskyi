@@ -1,7 +1,9 @@
 /* Classes */
 class PageContentBuilder {
     /* Constructors */
-    constructor() {}
+    constructor() {
+        updateListItemDeletionListeners();
+    }
 
     /* "Public" Methods */
     addListItem(itemName, itemValue = 1) {
@@ -14,6 +16,7 @@ class PageContentBuilder {
         itemWrapper.appendChild(this.createListItemPurchaseButtons());
 
         mainPanel.appendChild(itemWrapper);
+        updateListItemDeletionListeners();
         return;
     }
 
@@ -127,6 +130,16 @@ function addMainPanelListItem() {
     if (inputField.value !== "") {
         CONTENT_BUILDER.addListItem(inputField.value);
         inputField.value = "";
+    }
+    return;
+}
+
+function updateListItemDeletionListeners() {
+    const deleteButtons = document.querySelectorAll(".item-buttons > .red-button");
+    for (const button of deleteButtons) {
+        button.addEventListener("click", function() {
+            button.parentElement.parentElement.remove();
+        });
     }
     return;
 }

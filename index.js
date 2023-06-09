@@ -1,9 +1,7 @@
 /* Classes */
 class PageContentBuilder {
     /* Constructors */
-    constructor() {
-        updateListItemDeletionListeners();
-    }
+    constructor() { initEventListeners(); }
 
     /* "Public" Methods */
     addListItem(itemName, itemValue = 1) {
@@ -14,9 +12,8 @@ class PageContentBuilder {
         itemWrapper.appendChild(this.createListItemLabel(itemName));
         itemWrapper.appendChild(this.createListItemQuantityCounter(itemValue));
         itemWrapper.appendChild(this.createListItemPurchaseButtons());
-
+        
         mainPanel.appendChild(itemWrapper);
-        updateListItemDeletionListeners();
         return;
     }
 
@@ -26,7 +23,7 @@ class PageContentBuilder {
         buttonsWrapper.className = "item-buttons";
 
         buttonsWrapper.appendChild(this.createRevertButton());
-        buttonsWrapper.appendChild(this.createBoughtButton());
+        buttonsWrapper.appendChild(this.createBuyButton());
         buttonsWrapper.appendChild(this.createDeleteButton());
 
         return buttonsWrapper;
@@ -37,22 +34,31 @@ class PageContentBuilder {
         deleteButton.className = "item-button red-button square-button";
         deleteButton.innerHTML = "×";
         deleteButton.setAttribute("data-tooltip", "Remove");
+        deleteButton.addEventListener("click", () => { 
+            deleteButton.parentElement.parentElement.remove(); 
+        });
         return deleteButton;
     }
 
-    createBoughtButton() {
-        const boughtButton = document.createElement("button");
-        boughtButton.className = "item-button text-button square-button";
-        boughtButton.innerHTML = "Куплено";
-        boughtButton.setAttribute("data-tooltip", "Buy state");
-        return boughtButton;
+    createBuyButton() {
+        const buyButton = document.createElement("button");
+        buyButton.className = "item-button text-button square-button buy-button";
+        buyButton.innerHTML = "Куплено";
+        buyButton.setAttribute("data-tooltip", "Buy state");
+        buyButton.addEventListener("click", () => {
+            changeButtonsVisibility(buyButton, true);
+        });
+        return buyButton;
     }
 
     createRevertButton() {
         const revertButton = document.createElement("button");
-        revertButton.className = "item-button text-button square-button disabled";
+        revertButton.className = "item-button text-button square-button revert-button disabled";
         revertButton.innerHTML = "Не куплено";
         revertButton.setAttribute("data-tooltip", "Buy state");
+        revertButton.addEventListener("click", () => {
+            changeButtonsVisibility(revertButton, false);
+        });
         return revertButton;
     }
 
@@ -72,6 +78,9 @@ class PageContentBuilder {
         incrementButton.className = "item-button green-button circle-button";
         incrementButton.innerHTML = "+";
         incrementButton.setAttribute("data-tooltip", "Increment");
+        incrementButton.addEventListener("click", () => {
+            modifyItemCount(incrementButton, true);
+        });
         return incrementButton;
     }
 
@@ -96,6 +105,9 @@ class PageContentBuilder {
         }
         decrementButton.innerHTML = "–";
         decrementButton.setAttribute("data-tooltip", "Decrement");
+        decrementButton.addEventListener("click", () => {
+            modifyItemCount(decrementButton, false);
+        });
         return decrementButton;
     }
 
@@ -110,20 +122,6 @@ class PageContentBuilder {
 /* Object Instantiation */
 const CONTENT_BUILDER = new PageContentBuilder();
 
-/* Event Listeners */
-
-// Search Bar Input Field
-document.querySelector(".main-panel-search-bar > input").addEventListener("keypress", listItemCreationHandler);
-
-// Search Bar "Add Element" Button
-document.querySelector(".main-panel-search-bar > button").addEventListener("click", addMainPanelListItem);
-
-/* Event Handlers */
-function listItemCreationHandler(event) {
-    if (event.key === "Enter") addMainPanelListItem();
-    return;
-}
-
 /* Functions */
 function addMainPanelListItem() {
     const inputField = document.querySelector(".main-panel-search-bar > input");
@@ -134,12 +132,88 @@ function addMainPanelListItem() {
     return;
 }
 
-function updateListItemDeletionListeners() {
-    const deleteButtons = document.querySelectorAll(".item-buttons > .red-button");
-    for (const button of deleteButtons) {
-        button.addEventListener("click", function() {
-            button.parentElement.parentElement.remove();
+function changeButtonsVisibility(eventSourceButton, isBuying) {
+    const itemButtons = eventSourceButton.parentElement.parentElement.querySelectorAll(".item-button");
+    for (const button of itemButtons) {
+        if (button.className.includes("revert-button")) {
+            (isBuying) ? button.style.display = "inline-block" : button.style.display = "none";
+        }
+        else (isBuying) ? button.style.display = "none" : button.style.display = "inline-block";
+    }
+    return;
+}
+
+function modifyItemCount(eventSourceButton, isIncrementing) {
+    const itemCountLabel = eventSourceButton.parentElement.parentElement.querySelector(".item-counter-number");
+    if ((itemCountLabel.innerHTML === "1" && !isIncrementing) === false) {
+        (isIncrementing) ? ++itemCountLabel.innerHTML : --itemCountLabel.innerHTML;
+        updateDecrementButtonDisplayState(
+            eventSourceButton.parentElement.parentElement.querySelector(".item-counter > .red-button"), 
+            itemCountLabel.innerHTML
+        );
+    }
+    return;
+}
+
+function updateDecrementButtonDisplayState(button, itemHtmlValue) {
+    if (itemHtmlValue === "1" && !button.className.includes("inactive")) button.className += " inactive";
+    else button.className = button.className.replace(" inactive", "");
+    return;
+}
+
+/* Event Listeners & Handlers */
+function initEventListeners() {
+    initListItemCreationListener();
+    initListItemCreationButtonListener();
+
+    initListItemDeletionListeners();
+    initListItemPurchaseListeners(true);
+    initListItemPurchaseListeners(false);
+
+    initListItemCountModifierListeners(true);
+    initListItemCountModifierListeners(false);
+    return;
+}
+
+function initListItemCountModifierListeners(isIncrementing) {
+    const buttons = (isIncrementing) ? document.querySelectorAll(".item-counter > .green-button") : 
+        document.querySelectorAll(".item-counter > .red-button");
+    for (const button of buttons) {
+        button.addEventListener("click", () => {
+            modifyItemCount(button, isIncrementing);
         });
     }
+    return;
+}
+
+function initListItemPurchaseListeners(isBuying) {
+    const buttons = (isBuying) ? document.querySelectorAll(".buy-button") : document.querySelectorAll(".revert-button");
+    for (const button of buttons) {
+        button.addEventListener("click", () => {
+            changeButtonsVisibility(button, isBuying);
+        });
+    }
+    return;
+}
+
+function initListItemDeletionListeners() {
+    const deleteButtons = document.querySelectorAll(".item-buttons > .red-button");
+    for (const button of deleteButtons) {
+        button.addEventListener("click", () => { 
+            button.parentElement.parentElement.remove(); 
+        });
+    }
+    return;
+}
+
+function initListItemCreationButtonListener() {
+    document.querySelector(".main-panel-search-bar > button").addEventListener("click", addMainPanelListItem);
+    return;
+}
+
+function initListItemCreationListener() {
+    document.querySelector(".main-panel-search-bar > input").addEventListener("keypress", (event) => {
+        if (event.key === "Enter") addMainPanelListItem();
+    });
     return;
 }

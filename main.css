@@ -193,6 +193,7 @@ section.main-panel-item > section {
     background-color: rgba(220, 0, 0, 0.45);
     border: 1px solid rgba(220, 0, 0, 0.2);
     outline: none;
+    user-select: none;
 }
 
 .red-button:not(.inactive):hover {
@@ -294,11 +295,11 @@ section.side-panel-item span.item-amount {
 
 /** Tooltip styles */
 
-[data-tooltip] {
+:not(.inactive)[data-tooltip] {
     position: relative;
 }
   
-[data-tooltip]::after {
+:not(.inactive)[data-tooltip]::after {
     position: absolute;
     padding: 8px 12px;
     bottom: 15px;
@@ -315,7 +316,7 @@ section.side-panel-item span.item-amount {
     border-radius: 8px;
 }
   
-[data-tooltip]:hover:after {
+:not(.inactive)[data-tooltip]:hover:after {
     display: block;
     transform: translate(0%, -100%) scale(1);
 }

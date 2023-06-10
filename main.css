@@ -626,6 +626,11 @@ section.print-badge > span.author-label {
 
     section.main-panel {
         margin-bottom: 15px;
+        min-width: 400px;
+    }
+
+    section.side-panel {
+        min-width: 400px;
     }
 
     .item-wrapper {

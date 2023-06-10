@@ -288,7 +288,6 @@ function renameSidePanelItem(targetName, newName) {
 function nameOccurrenceCount(newName) {
     let counter = 0;
     for (const itemName of EXISTING_ITEM_NAMES) {
-        console.log(itemName);
         if (itemName === newName.toLowerCase()) ++counter;
     }
     return counter;
